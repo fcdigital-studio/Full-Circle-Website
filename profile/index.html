@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1280">
+  <title>Full Circle — Company Profile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #060606;
+      --cream:       #EDE8DF;
+      --cream-dim:   rgba(237,232,223,0.65);
+      --cream-faint: rgba(237,232,223,0.22);
+      --orange:      #F04E23;
+      --divider:     rgba(237,232,223,0.10);
+      --cell-bg:     rgba(10,6,3,0.98);
+      --serif:       'Cormorant Garamond', Georgia, serif;
+      --sans:        'Inter', system-ui, sans-serif;
+    }
+
+    html, body {
+      background: #111;
+      font-family: var(--sans);
+      color: var(--cream);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .deck {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      padding: 24px;
+    }
+
+    /* ── Single slide ── */
+    .slide {
+      position: relative;
+      width: 1280px;
+      height: 720px;
+      background: var(--bg);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    /* Brownish corner vignettes */
+    .slide::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 54% 62% at   0%   0%, rgba(92,44,6,0.34) 0%, transparent 65%),
+        radial-gradient(ellipse 54% 62% at 100%   0%, rgba(92,44,6,0.30) 0%, transparent 65%),
+        radial-gradient(ellipse 54% 62% at   0% 100%, rgba(92,44,6,0.30) 0%, transparent 65%),
+        radial-gradient(ellipse 54% 62% at 100% 100%, rgba(92,44,6,0.34) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(38,14,4,0.16) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Content layer ── */
+    .slide-inner {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: calc(100% - 40px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Footer bar ── */
+    .slide-foot {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 40px;
+      border-top: 1px solid var(--divider);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 56px;
+      z-index: 10;
+    }
+    .slide-foot-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .slide-foot-tagline {
+      font-family: var(--sans);
+      font-size: 9px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--orange);
+      opacity: 0.88;
+    }
+    .slide-foot-sep {
+      width: 1px;
+      height: 10px;
+      background: var(--divider);
+    }
+    .slide-foot-num {
+      font-family: var(--sans);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      color: rgba(237,232,223,0.22);
+    }
+    .slide-foot-url {
+      font-family: var(--sans);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(237,232,223,0.26);
+    }
+
+    /* ── Shared type ── */
+    .slide-label {
+      display: block;
+      font-family: var(--sans);
+      font-size: 9.5px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+    .slide-headline {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.04;
+      letter-spacing: -0.01em;
+    }
+
+    /* ═══════════════════════════════════════
+       SLIDE 1 — COVER
+    ═══════════════════════════════════════ */
+    .slide-cover .slide-inner {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .cover-logo {
+      width: 200px;
+      height: auto;
+      margin-bottom: 40px;
+      opacity: 0.95;
+    }
+    .cover-vline {
+      width: 1px;
+      height: 44px;
+      background: linear-gradient(180deg, transparent 0%, rgba(240,78,35,0.7) 38%, rgba(240,78,35,0.7) 62%, transparent 100%);
+      margin: 0 auto 22px;
+    }
+    .cover-kicker {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: rgba(237,232,223,0.4);
+      margin-bottom: 22px;
+    }
+    .cover-headline {
+      font-family: var(--serif);
+      font-size: 88px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 0.92;
+      letter-spacing: -0.015em;
+      margin-bottom: 30px;
+    }
+    .cover-headline .accent { color: var(--orange); }
+    .cover-rule {
+      width: 48px;
+      height: 1px;
+      background: var(--orange);
+      margin: 0 auto 22px;
+    }
+    .cover-sub {
+      font-family: var(--sans);
+      font-size: 10.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(237,232,223,0.35);
+    }
+
+    /* ═══════════════════════════════════════
+       SLIDE 2 — WHO WE ARE
+       Same structure as all other slides:
+       header (label + headline) → bordered box below
+    ═══════════════════════════════════════ */
+    .slide-who .slide-inner {
+      padding: 48px 64px 32px;
+      flex-direction: column;
+    }
+
+    .who-header .slide-headline {
+      font-size: 40px;
+      margin-bottom: 0;
+    }
+
+    .who-body-row {
+      display: flex;
+      flex-direction: row;
+      flex: 1;
+      margin-top: 24px;
+      border: 1px solid var(--divider);
+    }
+
+    .who-left {
+      width: 52%;
+      background: var(--cell-bg);
+      padding: 36px 40px;
+      display: flex;
+      align-items: center;
+      border-right: 1px solid var(--divider);
+    }
+
+    .who-intro {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--cream-dim);
+      line-height: 1.72;
+    }
+
+    .who-left-rule {
+      width: 32px;
+      height: 1.5px;
+      background: var(--orange);
+      margin-bottom: 22px;
+      opacity: 0.75;
+    }
+
+    .who-right {
+      width: 48%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .who-pillar {
+      flex: 1;
+      background: var(--cell-bg);
+      padding: 20px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-bottom: 1px solid var(--divider);
+    }
+    .who-pillar:last-child {
+      border-bottom: none;
+    }
+
+    .who-pillar-label {
+      display: block;
+      font-family: var(--sans);
+      font-size: 9px;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+    .who-pillar-text {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--cream-dim);
+      line-height: 1.7;
+    }
+
+    /* ═══════════════════════════════════════
+       SLIDE 3 — WHAT WE DO
+    ═══════════════════════════════════════ */
+    .slide-services .slide-inner {
+      padding: 48px 64px 32px;
+    }
+    .slide-services .slide-headline {
+      font-size: 42px;
+      margin-bottom: 0;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 0;
+      background: var(--divider);
+      border: 1px solid var(--divider);
+      flex: 1;
+      margin-top: 24px;
+    }
+    .service-item {
+      background: var(--cell-bg);
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+    }
+    .service-num {
+      font-family: var(--serif);
+      font-size: 14px;
+      font-style: italic;
+      color: var(--orange);
+      opacity: 0.48;
+      margin-bottom: 10px;
+    }
+    .service-name {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .service-desc {
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--cream-dim);
+      line-height: 1.66;
+    }
+
+    /* ═══════════════════════════════════════
+       SLIDES 4-5 — EXTENDED COMMERCIAL CAPABILITIES
+    ═══════════════════════════════════════ */
+    .slide-extension .slide-inner {
+      padding: 48px 64px 32px;
+    }
+    .slide-extension .slide-headline {
+      font-size: 42px;
+      margin-bottom: 0;
+    }
+    .extension-layout {
+      display: grid;
+      grid-template-columns: 46% 54%;
+      flex: 1;
+      margin-top: 24px;
+      border: 1px solid var(--divider);
+      background: var(--divider);
+    }
+    .extension-lead {
+      background: var(--cell-bg);
+      padding: 36px 38px;
+      border-right: 1px solid var(--divider);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .extension-rule {
+      display: none;
+    }
+    .extension-lead-text {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--cream-dim);
+      line-height: 1.72;
+    }
+    .extension-points {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 0;
+      background: var(--divider);
+    }
+    .extension-point {
+      background: var(--cell-bg);
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .extension-point-label {
+      display: block;
+      font-family: var(--sans);
+      font-size: 9px;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+    .extension-point-title {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.18;
+      margin-bottom: 10px;
+    }
+    .extension-point-text {
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--cream-dim);
+      line-height: 1.62;
+    }
+
+    /* ═══════════════════════════════════════
+       SLIDE 6 — HOW WE WORK
+       Open columns — content anchors to top, empty space dissolves
+       into the dark slide background. No filled card boxes.
+    ═══════════════════════════════════════ */
+    .slide-method .slide-inner {
+      padding: 52px 72px 48px;
+    }
+    .slide-method .slide-headline {
+      font-size: 46px;
+      margin-bottom: 0;
+    }
+    .method-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 44px;
+      flex: 1;
+      margin-top: 48px;
+    }
+    .method-step {
+      border-top: 1px solid var(--divider);
+      padding-top: 28px;
+      display: flex;
+      flex-direction: column;
+    }
+    .method-step-num {
+      display: block;
+      font-family: var(--sans);
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--orange);
+      opacity: 0.62;
+      margin-bottom: 14px;
+    }
+    .method-step-name {
+      font-family: var(--serif);
+      font-size: 38px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.0;
+      margin-bottom: 20px;
+    }
+    .method-step-rule {
+      width: 24px;
+      height: 1px;
+      background: var(--orange);
+      opacity: 0.5;
+      margin-bottom: 20px;
+    }
+    .method-step-desc {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--cream-dim);
+      line-height: 1.7;
+    }
+
+    /* ═══════════════════════════════════════
+       SLIDE 7 — WHO WE WORK WITH
+    ═══════════════════════════════════════ */
+    .slide-audience .slide-inner {
+      padding: 48px 64px 32px;
+    }
+    .slide-audience .slide-headline {
+      font-size: 42px;
+      margin-bottom: 0;
+    }
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 0;
+      background: var(--divider);
+      border: 1px solid var(--divider);
+      flex: 1;
+      margin-top: 24px;
+    }
+    .audience-item {
+      background: var(--cell-bg);
+      padding: 26px 30px;
+      display: flex;
+      flex-direction: column;
+    }
+    .audience-mark {
+      display: none;
+    }
+    .audience-name {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .audience-desc {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--cream-dim);
+      line-height: 1.68;
+    }
+
+    /* ═══════════════════════════════════════
+       SLIDE 8 — WHY IT MATTERS
+    ═══════════════════════════════════════ */
+    .slide-why .slide-inner {
+      padding: 48px 64px 32px;
+    }
+    .slide-why .slide-headline {
+      font-size: 42px;
+      margin-bottom: 0;
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 0;
+      background: var(--divider);
+      border: 1px solid var(--divider);
+      flex: 1;
+      margin-top: 24px;
+    }
+    .why-card {
+      background: var(--cell-bg);
+      padding: 26px 30px;
+      display: flex;
+      flex-direction: column;
+    }
+    .why-card-title {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+    .why-card-text {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--cream-dim);
+      line-height: 1.68;
+    }
+
+    /* ═══════════════════════════════════════
+       SLIDE 9 — ENGAGEMENT MODEL
+    ═══════════════════════════════════════ */
+    .slide-engagement .slide-inner {
+      padding: 52px 72px 36px;
+    }
+    .slide-engagement .slide-headline {
+      font-size: 44px;
+    }
+    .engagement-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      background: var(--divider);
+      border: 1px solid var(--divider);
+      flex: 1;
+      margin-top: 28px;
+    }
+    .engagement-col {
+      background: var(--cell-bg);
+      padding: 28px 30px;
+      display: flex;
+      flex-direction: column;
+    }
+    .engagement-col-num {
+      display: block;
+      font-family: var(--serif);
+      font-size: 14px;
+      font-style: italic;
+      color: var(--orange);
+      opacity: 0.52;
+      margin-bottom: 12px;
+    }
+    .engagement-col-title {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .engagement-col-rule {
+      display: none;
+    }
+    .engagement-col-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .engagement-col-items li {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--cream-dim);
+      line-height: 1.5;
+      padding-left: 0;
+      position: relative;
+    }
+    .engagement-col-items li::before {
+      content: none;
+    }
+
+    /* ═══════════════════════════════════════
+       SLIDE 10 — CONTACT
+    ═══════════════════════════════════════ */
+    .slide-contact .slide-inner {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 52px 88px 44px;
+    }
+    .contact-headline {
+      font-family: var(--serif);
+      font-size: 52px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.1;
+      max-width: 860px;
+      margin-bottom: 52px;
+    }
+    .contact-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      width: 100%;
+      border: 1px solid var(--divider);
+      background: var(--divider);
+      gap: 0;
+    }
+    .contact-cell {
+      background: var(--cell-bg);
+      padding: 26px 32px;
+      text-align: left;
+    }
+    .contact-cell-label {
+      display: block;
+      font-family: var(--sans);
+      font-size: 9px;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 11px;
+    }
+    .contact-cell-value {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--cream-dim);
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════════════
+       SLIDE 11 — CLOSING
+    ═══════════════════════════════════════ */
+    .slide-closing .slide-inner {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .closing-logo {
+      width: 168px;
+      height: auto;
+      margin-bottom: 44px;
+      opacity: 0.92;
+    }
+    .closing-vline {
+      width: 1px;
+      height: 38px;
+      background: linear-gradient(180deg, transparent 0%, rgba(240,78,35,0.65) 38%, rgba(240,78,35,0.65) 62%, transparent 100%);
+      margin: 0 auto 38px;
+    }
+    .closing-headline {
+      font-family: var(--serif);
+      font-size: 82px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 0.93;
+      letter-spacing: -0.015em;
+      margin-bottom: 28px;
+    }
+    .closing-headline .accent { color: var(--orange); }
+    .closing-sub {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(237,232,223,0.30);
+    }
+
+    /* ═══════════════════════════════════════
+       PRINT
+    ═══════════════════════════════════════ */
+    @media print {
+      @page { size: 1280px 720px; margin: 0; }
+      html, body { background: var(--bg); margin: 0; padding: 0; }
+      .deck { gap: 0; padding: 0; }
+      .slide { page-break-after: always; break-after: page; page-break-inside: avoid; }
+      .slide:last-child { page-break-after: avoid; break-after: avoid; }
+    }
+  </style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- ──────────────────────────────────────
+       SLIDE 1 — COVER
+  ────────────────────────────────────── -->
+  <section class="slide slide-cover">
+    <div class="slide-inner">
+      <img class="cover-logo" src="../assets/brand/logo/full_circle_logo_primary_color.svg" alt="Full Circle">
+      <div class="cover-vline"></div>
+      <p class="cover-kicker">Company Profile</p>
+      <h1 class="cover-headline">From Strategy <br><span class="accent">to Revenue.</span></h1>
+      <div class="cover-rule"></div>
+      <p class="cover-sub">AI-Powered Marketing &amp; Revenue Growth Consultancy</p>
+    </div>
+    <div class="slide-foot">
+      <div class="slide-foot-left">
+        <span class="slide-foot-tagline">From Strategy to Revenue.</span>
+        <div class="slide-foot-sep"></div>
+        <span class="slide-foot-num">01 / 11</span>
+      </div>
+      <span class="slide-foot-url">full-circle.uk</span>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────
+       SLIDE 2 — WHO WE ARE
+       Two-column: left intro + right pillars stacked vertically
+  ────────────────────────────────────── -->
+  <section class="slide slide-who">
+    <div class="slide-inner">
+      <div class="who-header">
+        <span class="slide-label">Who We Are</span>
+        <h2 class="slide-headline">Marketing-led revenue growth, built as one commercial system.</h2>
+      </div>
+      <div class="who-body-row">
+        <div class="who-left">
+          <p class="who-intro">Full Circle is an AI-powered marketing and revenue growth consultancy working with ambitious businesses across Egypt and the GCC. We connect business direction, positioning, demand, conversion, and execution into a single commercial system.</p>
+        </div>
+        <div class="who-right">
+          <div class="who-pillar">
+            <span class="who-pillar-label">Our Focus</span>
+            <p class="who-pillar-text">Strategy-to-revenue alignment across the full commercial cycle — positioning, demand, conversion, and execution — designed and executed as one system.</p>
+          </div>
+          <div class="who-pillar">
+            <span class="who-pillar-label">Our Model</span>
+            <p class="who-pillar-text">Selective, embedded engagements. Every KPI is tied to commercial outcomes — pipeline, conversion, and revenue — not vanity activity or reporting.</p>
+          </div>
+          <div class="who-pillar">
+            <span class="who-pillar-label">Our Markets</span>
+            <p class="who-pillar-text">Egypt, UAE, KSA, and the broader GCC — serving healthcare, real estate, FMCG, SaaS, and professional services sectors.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot">
+      <div class="slide-foot-left">
+        <span class="slide-foot-tagline">From Strategy to Revenue.</span>
+        <div class="slide-foot-sep"></div>
+        <span class="slide-foot-num">02 / 11</span>
+      </div>
+      <span class="slide-foot-url">full-circle.uk</span>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────
+       SLIDE 3 — WHAT WE DO
+  ────────────────────────────────────── -->
+  <section class="slide slide-services">
+    <div class="slide-inner">
+      <div>
+        <span class="slide-label">What We Do</span>
+        <h2 class="slide-headline">Six capabilities. One commercial system.</h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-item">
+          <span class="service-num">01</span>
+          <p class="service-name">Growth Strategy &amp; Positioning</p>
+          <p class="service-desc">Define where the business should compete, what it must be known for, and how position turns into advantage.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-num">02</span>
+          <p class="service-name">Demand &amp; Market Activation</p>
+          <p class="service-desc">Turn positioning into focused market action that builds demand and moves the right prospects toward intent.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-num">03</span>
+          <p class="service-name">Revenue Architecture</p>
+          <p class="service-desc">Strengthen the path from interest to income through better capture, conversion, follow-through, and visibility.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-num">04</span>
+          <p class="service-name">AI-Enabled Growth Operations</p>
+          <p class="service-desc">Use AI-enabled workflows to accelerate execution without losing strategic control, discipline, or judgment.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-num">05</span>
+          <p class="service-name">Commercial Growth Advisory</p>
+          <p class="service-desc">Align marketing, sales, offers, pricing, and execution around measurable commercial growth.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-num">06</span>
+          <p class="service-name">Brand Authority &amp; Market Presence</p>
+          <p class="service-desc">Build a market-facing presence that sharpens differentiation, strengthens trust, and supports revenue growth.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot">
+      <div class="slide-foot-left">
+        <span class="slide-foot-tagline">From Strategy to Revenue.</span>
+        <div class="slide-foot-sep"></div>
+        <span class="slide-foot-num">03 / 11</span>
+      </div>
+      <span class="slide-foot-url">full-circle.uk</span>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────
+       SLIDE 4 — MARKET ENTRY & LEGAL ENABLEMENT
+  ────────────────────────────────────── -->
+  <section class="slide slide-extension">
+    <div class="slide-inner">
+      <div>
+        <span class="slide-label">Market Entry &amp; Legal Enablement</span>
+        <h2 class="slide-headline">Where commercial strategy and legal readiness move together.</h2>
+      </div>
+      <div class="extension-layout">
+        <div class="extension-lead">
+          <div class="extension-rule"></div>
+          <p class="extension-lead-text">For businesses entering Egypt, expanding across the GCC, or restructuring for growth, legal setup is not a separate administrative step. It is part of the commercial architecture that allows the business to launch, operate, contract, and grow with clarity.</p>
+        </div>
+        <div class="extension-points">
+          <div class="extension-point">
+            <span class="extension-point-label">Business Entry</span>
+            <p class="extension-point-title">Market-ready structure</p>
+            <p class="extension-point-text">We connect opportunity, positioning, launch planning, and operating requirements before the business enters the market.</p>
+          </div>
+          <div class="extension-point">
+            <span class="extension-point-label">Legal Partner</span>
+            <p class="extension-point-title">LB legal support</p>
+            <p class="extension-point-text">Through our legal partner, LB, clients can access company setup, legal structuring, contracts, compliance, and corporate advisory support.</p>
+          </div>
+          <div class="extension-point">
+            <span class="extension-point-label">Growth Readiness</span>
+            <p class="extension-point-title">Ready to operate</p>
+            <p class="extension-point-text">The goal is not only to establish the entity, but to prepare it to sell, partner, hire, contract, and scale with fewer commercial gaps.</p>
+          </div>
+          <div class="extension-point">
+            <span class="extension-point-label">Regional Focus</span>
+            <p class="extension-point-title">Egypt and GCC</p>
+            <p class="extension-point-text">A practical route for founders, investors, and companies entering Egypt or expanding regionally with a clearer business foundation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot">
+      <div class="slide-foot-left">
+        <span class="slide-foot-tagline">From Strategy to Revenue.</span>
+        <div class="slide-foot-sep"></div>
+        <span class="slide-foot-num">04 / 11</span>
+      </div>
+      <span class="slide-foot-url">full-circle.uk</span>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────
+       SLIDE 5 — DIGITAL PRESENCE & REVENUE GROWTH
+  ────────────────────────────────────── -->
+  <section class="slide slide-extension">
+    <div class="slide-inner">
+      <div>
+        <span class="slide-label">Digital Presence &amp; Revenue Growth</span>
+        <h2 class="slide-headline">The market-facing layer that turns credibility into demand.</h2>
+      </div>
+      <div class="extension-layout">
+        <div class="extension-lead">
+          <div class="extension-rule"></div>
+          <p class="extension-lead-text">A brand, profile, website, or social presence is not decoration. It is the front line of how the market understands the business, trusts it, and decides whether to take the next commercial step.</p>
+        </div>
+        <div class="extension-points">
+          <div class="extension-point">
+            <span class="extension-point-label">Brand Identity</span>
+            <p class="extension-point-title">Built to signal value</p>
+            <p class="extension-point-text">Logo systems, visual identity, rebranding, mood direction, and messaging shaped around trust, differentiation, and commercial intent.</p>
+          </div>
+          <div class="extension-point">
+            <span class="extension-point-label">Company Profile</span>
+            <p class="extension-point-title">A stronger business story</p>
+            <p class="extension-point-text">Company profiles and portfolios that explain the business clearly, position its value, and support sales conversations.</p>
+          </div>
+          <div class="extension-point">
+            <span class="extension-point-label">Websites</span>
+            <p class="extension-point-title">Designed for conversion</p>
+            <p class="extension-point-text">Landing pages and corporate websites that present the offer, guide attention, capture interest, and support the revenue path.</p>
+          </div>
+          <div class="extension-point">
+            <span class="extension-point-label">Social Presence</span>
+            <p class="extension-point-title">Consistent market voice</p>
+            <p class="extension-point-text">LinkedIn and social media presence built to strengthen authority, keep the market warm, and support ongoing commercial activity.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot">
+      <div class="slide-foot-left">
+        <span class="slide-foot-tagline">From Strategy to Revenue.</span>
+        <div class="slide-foot-sep"></div>
+        <span class="slide-foot-num">05 / 11</span>
+      </div>
+      <span class="slide-foot-url">full-circle.uk</span>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────
+       SLIDE 6 — HOW WE WORK
+  ────────────────────────────────────── -->
+  <section class="slide slide-method">
+    <div class="slide-inner">
+      <div>
+        <span class="slide-label">How We Work</span>
+        <h2 class="slide-headline">A three-phase commercial system.</h2>
+      </div>
+      <div class="method-steps">
+        <div class="method-step">
+          <span class="method-step-num">Phase 01</span>
+          <p class="method-step-name">Diagnose</p>
+
+          <p class="method-step-desc">A structured commercial audit — brand positioning, market opportunity, and conversion performance. We read the business before we prescribe anything.</p>
+        </div>
+        <div class="method-step">
+          <span class="method-step-num">Phase 02</span>
+          <p class="method-step-name">Build</p>
+
+          <p class="method-step-desc">We design and deploy the full growth system — from repositioning through demand infrastructure, conversion design, and revenue operations.</p>
+        </div>
+        <div class="method-step">
+          <span class="method-step-num">Phase 03</span>
+          <p class="method-step-name">Close</p>
+
+          <p class="method-step-desc">We stay embedded through conversion — optimising pipeline, enabling sales, and measuring all outcomes against commercial KPIs. No handoff. No disappearing.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot">
+      <div class="slide-foot-left">
+        <span class="slide-foot-tagline">From Strategy to Revenue.</span>
+        <div class="slide-foot-sep"></div>
+        <span class="slide-foot-num">06 / 11</span>
+      </div>
+      <span class="slide-foot-url">full-circle.uk</span>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────
+       SLIDE 7 — WHO WE WORK WITH
+  ────────────────────────────────────── -->
+  <section class="slide slide-audience">
+    <div class="slide-inner">
+      <div>
+        <span class="slide-label">Who We Work With</span>
+        <h2 class="slide-headline">Built for businesses ready to scale.</h2>
+      </div>
+      <div class="audience-grid">
+        <div class="audience-item">
+          <div class="audience-mark"></div>
+          <p class="audience-name">Growth-Stage Companies</p>
+          <p class="audience-desc">Businesses ready to scale — but needing a disciplined commercial system to do it without waste or guesswork.</p>
+        </div>
+        <div class="audience-item">
+          <div class="audience-mark"></div>
+          <p class="audience-name">Enterprise Brands</p>
+          <p class="audience-desc">Established organisations needing to reposition, reactivate demand, or reconnect market activity to measurable revenue outcomes.</p>
+        </div>
+        <div class="audience-item">
+          <div class="audience-mark"></div>
+          <p class="audience-name">Regional Expansions</p>
+          <p class="audience-desc">International brands entering Egypt or the GCC — and regional brands expanding across the Arab world — who need market-specific commercial strategy.</p>
+        </div>
+        <div class="audience-item">
+          <div class="audience-mark"></div>
+          <p class="audience-name">Founders &amp; Leadership Teams</p>
+          <p class="audience-desc">Principals who want senior commercial thinking embedded alongside them — not junior agency teams running disconnected campaigns.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot">
+      <div class="slide-foot-left">
+        <span class="slide-foot-tagline">From Strategy to Revenue.</span>
+        <div class="slide-foot-sep"></div>
+        <span class="slide-foot-num">07 / 11</span>
+      </div>
+      <span class="slide-foot-url">full-circle.uk</span>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────
+       SLIDE 8 — WHY IT MATTERS
+  ────────────────────────────────────── -->
+  <section class="slide slide-why">
+    <div class="slide-inner">
+      <div>
+        <span class="slide-label">Why It Matters</span>
+        <h2 class="slide-headline">Where growth breaks down.</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <p class="why-card-title">Misaligned Positioning</p>
+          <p class="why-card-text">Brand narrative that doesn't match buyer decision criteria. Awareness investment that never converts to preference, pipeline, or revenue.</p>
+        </div>
+        <div class="why-card">
+          <p class="why-card-title">Demand Without Control</p>
+          <p class="why-card-text">Market activity that generates motion but not qualified demand. Volume without commercial precision is cost — not growth.</p>
+        </div>
+        <div class="why-card">
+          <p class="why-card-title">Conversion Leakage</p>
+          <p class="why-card-text">Leads that enter the funnel but never reach commercial close. The gap between demand and revenue is where most commercial systems quietly fail.</p>
+        </div>
+        <div class="why-card">
+          <p class="why-card-title">Execution Drift</p>
+          <p class="why-card-text">Strategy that doesn't survive contact with operations. Misalignment between what leadership decides and what the market actually experiences.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot">
+      <div class="slide-foot-left">
+        <span class="slide-foot-tagline">From Strategy to Revenue.</span>
+        <div class="slide-foot-sep"></div>
+        <span class="slide-foot-num">08 / 11</span>
+      </div>
+      <span class="slide-foot-url">full-circle.uk</span>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────
+       SLIDE 9 — ENGAGEMENT MODEL
+  ────────────────────────────────────── -->
+  <section class="slide slide-engagement">
+    <div class="slide-inner">
+      <div>
+        <span class="slide-label">Engagement Model</span>
+        <h2 class="slide-headline">How Full Circle creates value.</h2>
+      </div>
+      <div class="engagement-cols">
+        <div class="engagement-col">
+          <span class="engagement-col-num">01</span>
+          <p class="engagement-col-title">Commercial Reading</p>
+          <div class="engagement-col-rule"></div>
+          <ul class="engagement-col-items">
+            <li>Commercial audit &amp; gap analysis</li>
+            <li>Brand and positioning review</li>
+            <li>Competitive landscape mapping</li>
+            <li>Pipeline and conversion diagnosis</li>
+            <li>Strategic brief and opportunity map</li>
+          </ul>
+        </div>
+        <div class="engagement-col">
+          <span class="engagement-col-num">02</span>
+          <p class="engagement-col-title">Growth System Design</p>
+          <div class="engagement-col-rule"></div>
+          <ul class="engagement-col-items">
+            <li>Repositioning and messaging architecture</li>
+            <li>Market activation strategy</li>
+            <li>Conversion design and content system</li>
+            <li>Revenue operations structure</li>
+            <li>KPI framework and measurement model</li>
+          </ul>
+        </div>
+        <div class="engagement-col">
+          <span class="engagement-col-num">03</span>
+          <p class="engagement-col-title">Execution Control</p>
+          <div class="engagement-col-rule"></div>
+          <ul class="engagement-col-items">
+            <li>Activation and execution oversight</li>
+            <li>Pipeline monitoring and optimisation</li>
+            <li>Sales enablement and alignment</li>
+            <li>Performance reporting</li>
+            <li>Strategic advisory throughout</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot">
+      <div class="slide-foot-left">
+        <span class="slide-foot-tagline">From Strategy to Revenue.</span>
+        <div class="slide-foot-sep"></div>
+        <span class="slide-foot-num">09 / 11</span>
+      </div>
+      <span class="slide-foot-url">full-circle.uk</span>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────
+       SLIDE 10 — CONTACT
+  ────────────────────────────────────── -->
+  <section class="slide slide-contact">
+    <div class="slide-inner">
+      <p class="contact-headline">If marketing needs to become revenue,<br>this is where it starts.</p>
+      <div class="contact-row">
+        <div class="contact-cell">
+          <span class="contact-cell-label">Website</span>
+          <span class="contact-cell-value">full-circle.uk</span>
+        </div>
+        <div class="contact-cell">
+          <span class="contact-cell-label">Email</span>
+          <span class="contact-cell-value">info@full-circle.uk</span>
+        </div>
+        <div class="contact-cell">
+          <span class="contact-cell-label">Phone</span>
+          <span class="contact-cell-value">+20 100 901 9440</span>
+        </div>
+        <div class="contact-cell">
+          <span class="contact-cell-label">Address</span>
+          <span class="contact-cell-value">Al Yasmeen, First Settlement<br>New Cairo, Egypt</span>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot">
+      <div class="slide-foot-left">
+        <span class="slide-foot-tagline">From Strategy to Revenue.</span>
+        <div class="slide-foot-sep"></div>
+        <span class="slide-foot-num">10 / 11</span>
+      </div>
+      <span class="slide-foot-url">full-circle.uk</span>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────
+       SLIDE 11 — CLOSING
+  ────────────────────────────────────── -->
+  <section class="slide slide-closing">
+    <div class="slide-inner">
+      <img class="closing-logo" src="../assets/brand/logo/full_circle_logo_primary_color.svg" alt="Full Circle">
+      <div class="closing-vline"></div>
+      <h2 class="closing-headline">From Strategy <br><span class="accent">to Revenue.</span></h2>
+      <p class="closing-sub">AI-Powered Marketing &amp; Revenue Growth Consultancy — Egypt &amp; GCC</p>
+    </div>
+    <div class="slide-foot">
+      <div class="slide-foot-left">
+        <span class="slide-foot-tagline">From Strategy to Revenue.</span>
+        <div class="slide-foot-sep"></div>
+        <span class="slide-foot-num">11 / 11</span>
+      </div>
+      <span class="slide-foot-url">full-circle.uk</span>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
