@@ -1197,6 +1197,8 @@ footer {
   .cursor-ring { width: 28px; height: 28px; }
   .cursor-c { width: 20px; opacity: 0.8; }
 
+  .audience-item { transform: translateX(1rem); }
+
   nav {
     flex-direction: row;
     align-items: center;
